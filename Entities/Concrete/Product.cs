@@ -9,6 +9,7 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
+        public int RestaurantId { get; set; }
         public string ProductName { get; set; }
         public int Stock { get; set; }
         public decimal UnitPrice { get; set; }

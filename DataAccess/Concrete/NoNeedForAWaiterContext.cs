@@ -14,7 +14,7 @@ namespace DataAccess.Concrete
             optionsBuilder.UseSqlServer(@"Server=.; Database=NoNeedForAWaiterDb;Trusted_Connection= true");
         }
         public DbSet<Category> CATEGORIES { get; set; }
-        public DbSet<Table> TABLES { get; set; }
+        public DbSet<Table> TABLES_ { get; set; }
         public DbSet<Restaurant> RESTAURANTS { get; set; }
         public DbSet<OrderDetail> ORDERDETAILS { get; set; }
         public DbSet<Product> PRODUCTS { get; set; }

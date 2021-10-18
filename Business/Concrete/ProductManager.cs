@@ -12,36 +12,36 @@ namespace Business.Concrete
 {
     public class ProductManager : IProductService
     {
-        IProductDal _urunDal;
-        public ProductManager(IProductDal urunDal)
+        IProductDal _productDal;
+        public ProductManager(IProductDal productDal)
         {
-            _urunDal = urunDal;
+            _productDal = productDal;
         }
-        public IResult Add(Product urun)
+        public IResult Add(Product product)
         {
-            _urunDal.Add(urun);
+            _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        public IResult Delete(Product urun)
+        public IResult Delete(Product product)
         {
-            _urunDal.Delete(urun);
+            _productDal.Delete(product);
             return new SuccessResult(Messages.ProductDeleted);
         }
 
-        public IDataResult<List<Product>> GetAll()
+        public IDataResult<List<Product>> GetAllProductsByCategoryIdAndRestaurantId(int categoryId, int restaurantId)
         {
-            return new SuccessDataResult<List<Product>>(_urunDal.GetAll(),Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == categoryId && p.RestaurantId == restaurantId));
         }
 
-        public IDataResult<List<Product>> GetAllProductsByCategoryId(int categoryId)
+        public IDataResult<List<Product>> GetAllProductsByRestaurantId(int restaurantId)
         {
-            return new SuccessDataResult<List<Product>>(_urunDal.GetAll(u => u.CategoryId == categoryId),Messages.ProductsListedByCurrentCategory);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.RestaurantId == restaurantId));
         }
 
-        public IResult Update(Product urun)
+        public IResult Update(Product product)
         {
-            _urunDal.Update(urun);
+            _productDal.Update(product);
             return new SuccessResult(Messages.ProductUpdated);
         }
     }

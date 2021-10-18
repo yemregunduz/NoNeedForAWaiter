@@ -11,17 +11,17 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class OrdersController : ControllerBase
     {
-        IProductService _productService;
-        public ProductsController(IProductService productService)
+        IOrderService _orderService;
+        public OrdersController(IOrderService orderService)
         {
-            _productService = productService;
+            _orderService = orderService;
         }
         [HttpPost("add")]
-        public IActionResult Add(Product product)
+        public IActionResult Add(Order order)
         {
-            var result = _productService.Add(product);
+            var result = _orderService.Add(order);
             if (result.Success==true)
             {
                 return Ok(result);
@@ -29,9 +29,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(Product product)
+        public IActionResult Delete(Order order)
         {
-            var result = _productService.Delete(product);
+            var result = _orderService.Delete(order);
             if (result.Success == true)
             {
                 return Ok(result);
@@ -39,35 +39,34 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update(Product product)
+        public IActionResult Update(Order order)
         {
-            var result = _productService.Update(product);
+            var result = _orderService.Update(order);
             if (result.Success == true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getallproductsbycategoryidandrestarauntid")]
-        public IActionResult GetAllProductsByCategoryIdAndRestarauntId(int categoryId,int restarauntId)
+        [HttpGet("getallordertablesdtobyrestaurantid")]
+        public IActionResult GetAllOrderTablesDtoByRestaurantId(int restaurantId)
         {
-            var result = _productService.GetAllProductsByCategoryIdAndRestarauntId(categoryId,restarauntId);
+            var result = _orderService.GetAllOrderTablesDtoByRestaurantId(restaurantId);
             if (result.Success==true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getallproductsbyrestarauntid")]
-        public IActionResult GetAllProductsByRestarauntId(int restarauntId)
+        [HttpGet("getallordertablesdtobytableid")]
+        public IActionResult GetAllOrderTablesDtoByTableId(int tableId)
         {
-            var result = _productService.GetAllProductsByRestarauntId(restarauntId);
-            if (result.Success==true)
+            var result = _orderService.GetAllOrderTablesDtoByTableId(tableId);
+            if (result.Success == true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
     }
 }
