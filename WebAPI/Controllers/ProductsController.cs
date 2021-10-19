@@ -48,20 +48,20 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getallproductsbycategoryidandrestarauntid")]
+        [HttpGet("getallproductsbycategoryidandrestaurantid")]
         public IActionResult GetAllProductsByCategoryIdAndRestarauntId(int categoryId,int restarauntId)
         {
-            var result = _productService.GetAllProductsByCategoryIdAndRestarauntId(categoryId,restarauntId);
+            var result = _productService.GetAllProductsByCategoryIdAndRestaurantId(categoryId,restarauntId);
             if (result.Success==true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getallproductsbyrestarauntid")]
-        public IActionResult GetAllProductsByRestarauntId(int restarauntId)
+        [HttpGet("getallproductsbyrestaurantid")]
+        public IActionResult GetAllProductsByRestaurantId(int restarauntId)
         {
-            var result = _productService.GetAllProductsByRestarauntId(restarauntId);
+            var result = _productService.GetAllProductsByRestaurantId(restarauntId);
             if (result.Success==true)
             {
                 return Ok(result);
