@@ -1,6 +1,8 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -32,5 +34,14 @@ namespace Business.Constants
         public static string TableDeleted = "Masa silindi.";
         public static string TableAdded = "Masa eklendi.";
         public static string TablesListedByRestaurantId = "Restorana ait tüm masalar listelendi.";
+        public static string AuthorizationDenied = "Bu operasyona yetkiniz yok.";
+        public static string UserAdded = "Kullanıcı eklendi.";
+        public static string ClaimsListed = "Kullanıcının yetkileri listelendi.";
+        public static string AccessTokenCreated = "Token oluşturuldu.";
+        public static string UserAlreadyExist = "Kullanıcı zaten sisteme kayıtlı.";
+        public static string UserNotFound = "Sisteme kayıtlı böyle bir kullanıcı yok.";
+        public static string PasswordError = "Girdiğiniz şifre hatalı.";
+        public static string SuccessfulLogin = "Giriş başarılı!";
+        public static string UserRegistered = "Kayıt başarılı!";
     }
 }

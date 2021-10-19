@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -19,5 +20,8 @@ namespace DataAccess.Concrete
         public DbSet<OrderDetail> ORDERDETAILS { get; set; }
         public DbSet<Product> PRODUCTS { get; set; }
         public DbSet<Order> ORDERS { get; set; }
+        public DbSet<User> USERS { get; set; }
+        public DbSet<OperationClaim> OPERATIONCLAIMS { get; set; }
+        public DbSet<UserOperationClaim> USEROPERATIONCLAIMS { get; set; }
     }
 }

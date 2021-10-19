@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -17,6 +18,7 @@ namespace Business.Concrete
         {
             _categoryDal = categoryDal;
         }
+        [SecuredOperation("category.add,admin")]
         public IResult Add(Category category)
         {
             _categoryDal.Add(category);
