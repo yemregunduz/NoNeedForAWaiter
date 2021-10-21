@@ -43,5 +43,33 @@ namespace Business.Constants
         public static string PasswordError = "Girdiğiniz şifre hatalı.";
         public static string SuccessfulLogin = "Giriş başarılı!";
         public static string UserRegistered = "Kayıt başarılı!";
+        public static string CategoryNameIsRequired = "Kategori adı girilmelidir.";
+        public static string TableIdIsRequired = "Masa numarası girilmelidir.";
+        public static string OrderDateIsNotValid = "Geçmişe dönük sipariş verilemez.";
+        public static string OrderDateIsRequired = "Sipariş tarihi girilmelidir.";
+        public static string ProductIsRequired = "Sipariş detayında ürün olmalıdır.";
+        public static string QuantityIsRequired = "Sipariş detayında miktar girmek zorunludur.";
+        public static string OrderIdIsRequired = "Sipariş detayı bir siparişe ait olmalıdır.";
+        public static string CategoryIdIsRequired = "Ürünün kategorisini girmek zorunludur.";
+        public static string ProductNameIsRequired = "Ürün adı boş bırakılamaz.";
+        public static string ProductNameIsNotValid = "Ürün adı en az 2 en fazla 100 karakter olmalıdır.";
+        public static string UnitPriceIsRequired = "Ürünün birim fiyatı boş bırakılamaz.";
+        public static string UnitPriceIsNotValid = "Ürünün birim fiyatı sıfırdan büyük olmalıdır.";
+        public static string ProductDescriptionIsNotValid = "Ürün açıklaması en az 250 karakter olmalıdır.";
+        public static string StockIsNotValid = "Stok eksi değer alamaz.";
+        public static string RestaurantIdIsRequired = "Ürünün hangi restorana ait olduğu girilmelidir.";
+        public static string QuantityIsNotValid = "Miktar sıfırdan büyük olmalıdır.";
+        public static string TaxNumberIsRequired = "Vergi numarası girmek zorunludur.";
+        public static string RestaurantNameIsNotValid = "Restoran adı maksimum 100 karakter olmalıdır.";
+        public static string TableNoIsRequired = "Masa mumarası girilmelidir";
+        public static string FirstNameIsRequired = "İsim alanı boş bırakılamaz.";
+        public static string FirstNameIsNotValid = "İsim 50 karakterden uzun olamaz.";
+        public static string LastNameIsRequired = "Soyad alanı boş bırakılamaz.";
+        public static string LastNameIsNotValid = "Soyad 50 karakterden uzun olamaz.";
+        public static string RestaurantIsRequired = "Kullanıcının çalıştığı restoran girilmelidir.";
+        public static string EmailIsRequired = "Kullanıcının emaili girilmelidir.";
+        public static string EmailIsNotValid = "Lütfen geçerli bir email adresi giriniz.";
+        public static string PasswordIsRequired = "Şifre alanı boş bırakılamaz.";
+        public static string PasswordIsNotValid = "Şifreniz en az bir büyük harf,bir sayı,bir özel karakterden oluşmalı ve en az 8 karakter olmalıdır.";
     }
 }
