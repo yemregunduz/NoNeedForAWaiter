@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -20,14 +21,16 @@ namespace Business.Concrete
         {
             _tableDal = tableDal;
         }
-        [ValidationAspect(typeof(TableValidator), Priority = 1)]
+        [ValidationAspect(typeof(TableValidator), Priority = 2)]
         [CacheRemoveAspect("ITableService.Get")]
+        [SecuredOperation("table.add,admin", Priority = 1)]
         public IResult Add(Table table)
         {
             _tableDal.Add(table);
             return new SuccessResult(Messages.TableAdded);
         }
         [CacheRemoveAspect("ITableService.Get")]
+        [SecuredOperation("table.delete,admin", Priority = 1)]
         public IResult Delete(Table table)
         {
             _tableDal.Delete(table);
@@ -38,7 +41,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Table>>(_tableDal.GetAll(t => t.RestaurantId == restaurantId), Messages.TablesListedByRestaurantId);
         }
-        [ValidationAspect(typeof(TableValidator), Priority = 1)]
+        [SecuredOperation("table.update,admin", Priority = 1)]
+        [ValidationAspect(typeof(TableValidator), Priority = 2)]
         [CacheRemoveAspect("ITableService.Get")]
         public IResult Update(Table table)
         {

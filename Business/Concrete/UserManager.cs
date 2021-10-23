@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -20,7 +21,8 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-        [ValidationAspect(typeof(UserValidator), Priority = 1)]
+        [SecuredOperation("user.add,admin", Priority = 1)]
+        [ValidationAspect(typeof(UserValidator), Priority = 2)]
         [CacheRemoveAspect("IUserService.Get")]
         public IResult Add(User user)
         {

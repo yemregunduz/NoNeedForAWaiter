@@ -49,9 +49,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getallproductsbycategoryidandrestaurantid")]
-        public IActionResult GetAllProductsByCategoryIdAndRestarauntId(int categoryId,int restarauntId)
+        public IActionResult GetAllProductsByCategoryIdAndRestarauntId(int categoryId,int restaurantId)
         {
-            var result = _productService.GetAllProductsByCategoryIdAndRestaurantId(categoryId,restarauntId);
+            var result = _productService.GetAllProductsByCategoryIdAndRestaurantId(categoryId, restaurantId);
             if (result.Success==true)
             {
                 return Ok(result);
@@ -59,9 +59,29 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getallproductsbyrestaurantid")]
-        public IActionResult GetAllProductsByRestaurantId(int restarauntId)
+        public IActionResult GetAllProductsByRestaurantId(int restaurantId)
         {
-            var result = _productService.GetAllProductsByRestaurantId(restarauntId);
+            var result = _productService.GetAllProductsByRestaurantId(restaurantId);
+            if (result.Success==true)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getallproductdetailsdtobyrestaurantid")]
+        public IActionResult GetAllProductDetailsDtoByRestaurantId(int restaurantId)
+        {
+            var result = _productService.GetAllProductDetailsDtoByRestaurantId(restaurantId);
+            if (result.Success==true)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getallproductdetailsdtobycategoryidandrestaurantid")]
+        public IActionResult GetAllProductDetailsDtoByCategoryIdAndRestaurantId(int categoryId,int restaurantId)
+        {
+            var result = _productService.GetAllProductDetailsDtoByCategoryIdAndRestaurantId(categoryId, restaurantId);
             if (result.Success==true)
             {
                 return Ok(result);

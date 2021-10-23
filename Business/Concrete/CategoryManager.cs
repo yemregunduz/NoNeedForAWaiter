@@ -14,6 +14,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+    
     public class CategoryManager : ICategoryService
     {
         ICategoryDal _categoryDal;
@@ -30,6 +31,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CategoryAdded);
         }
         [CacheRemoveAspect("ICategoryService.Get")]
+        [SecuredOperation("category.delete,admin")]
         public IResult Delete(Category category)
         {
             _categoryDal.Delete(category);
@@ -38,10 +40,11 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Category>> GetAll()
         {
-            return new SuccessDataResult<List<Category>>(Messages.CategoriesListed);
+            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(),Messages.CategoriesListed);
         }
         [ValidationAspect(typeof(CategoryValidator), Priority = 1)]
         [CacheRemoveAspect("ICategoryService.Get")]
+        [SecuredOperation("category.update,admin")]
         public IResult Update(Category category)
         {
             _categoryDal.Update(category);
