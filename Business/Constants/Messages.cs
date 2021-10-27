@@ -74,5 +74,9 @@ namespace Business.Constants
         public static string UserStatusIsInactive = "Kullanıcının durumu pasif.";
         public static string UserStatusUpdated = "Kullanıcı durumu güncellendi.";
         public static string UserDeleted = "Kullanıcı silindi.";
+        public static string TitleAdded = "Ünvan eklendi";
+        public static string TitleDeleted = "Ünvan silindi";
+        public static string TitleListed = "Ünvanlar listelendi.";
+        public static string TitleUpdated = "Ünvan güncellendi.";
     }
 }

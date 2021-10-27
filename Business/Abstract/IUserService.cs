@@ -13,6 +13,6 @@ namespace Business.Abstract
         IResult Delete(User user);
         IResult UpdateUserStatus(User user);
         IDataResult<User> GetUserByMail(string email);
-        IDataResult<List<User>> GetAllUsersByRestaurantId(int restaurantId);
+        IDataResult<List<User>> GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status);
     }
 }

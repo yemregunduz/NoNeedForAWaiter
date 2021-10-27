@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,17 +11,17 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class TitlesController : ControllerBase
     {
-        IUserService _userService;
-        public UsersController(IUserService userService)
+        ITitleService _titleService;
+        public TitlesController(ITitleService titleService)
         {
-            _userService = userService;
+            _titleService = titleService;
         }
         [HttpPost("add")]
-        public IActionResult Add(User user)
+        public IActionResult Add(Title title)
         {
-            var result = _userService.Add(user);
+            var result = _titleService.Add(title);
             if (result.Success==true)
             {
                 return Ok(result);
@@ -29,34 +29,35 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(User user)
+        public IActionResult Delete(Title title)
         {
-            var result = _userService.Delete(user);
+            var result = _titleService.Delete(title);
             if (result.Success == true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpPost("updateuserstatus")]
-        public IActionResult UpdateUserStatus(User user)
+        [HttpPost("update")]
+        public IActionResult Update(Title title)
         {
-            var result = _userService.UpdateUserStatus(user);
+            var result = _titleService.Update(title);
             if (result.Success == true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getallusersbyrestaurantidandstatus")]
-        public IActionResult GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status)
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
-            var result = _userService.GetAllUsersByRestaurantIdAndStatus(restaurantId,status);
-            if (result.Success == true)
+            var result = _titleService.GetAll();
+            if (result.Success==true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
     }
 }

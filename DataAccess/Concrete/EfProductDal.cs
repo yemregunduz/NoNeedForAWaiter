@@ -19,6 +19,8 @@ namespace DataAccess.Concrete
                 var result = from p in context.PRODUCTS
                              join c in context.CATEGORIES
                              on p.CategoryId equals c.Id
+                             join t in context.TITLES
+                             on p.TitleId equals t.Id
                              select new ProductDetailDto
                              
                              {
@@ -30,7 +32,9 @@ namespace DataAccess.Concrete
                                  Stock = p.Stock,
                                  CategoryName = c.CategoryName,
                                  UnitPrice = p.UnitPrice,
-                                 RestaurantId=p.RestaurantId
+                                 RestaurantId=p.RestaurantId,
+                                 TitleId=t.Id,
+                                 Title=t.Title_
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

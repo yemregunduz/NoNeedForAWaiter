@@ -32,11 +32,13 @@ namespace Core.Utilities.Security.JWT
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);
             var restaurantId = user.RestaurantId;
+            var userId = user.Id;
             return new AccessToken
             {
                 Token = token,
                 Expiration = _accessTokenExpiration,
-                RestaurantId = restaurantId
+                RestaurantId = restaurantId,
+                UserId = userId
             };
         }
         public JwtSecurityToken CreateJwtSecurityToken(User user,TokenOptions tokenOptions,SigningCredentials signingCredentials,List<OperationClaim> operationClaims)

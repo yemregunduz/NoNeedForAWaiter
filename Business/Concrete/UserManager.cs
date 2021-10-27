@@ -39,9 +39,9 @@ namespace Business.Concrete
 
         [SecuredOperation("admin",Priority =1)]
         [CacheAspect]
-        public IDataResult<List<User>> GetAllUsersByRestaurantId(int restaurantId)
+        public IDataResult<List<User>> GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status)
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.RestaurantId == restaurantId));
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.RestaurantId == restaurantId && u.Status == status));
         }
 
         [CacheAspect]
