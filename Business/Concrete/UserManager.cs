@@ -29,6 +29,21 @@ namespace Business.Concrete
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
+        [SecuredOperation("admin",Priority =1)]
+        [CacheRemoveAspect("IUserService.Get")]
+        public IResult Delete(User user)
+        {
+            _userDal.Delete(user);
+            return new SuccessResult(Messages.UserDeleted);
+        }
+
+        [SecuredOperation("admin",Priority =1)]
+        [CacheAspect]
+        public IDataResult<List<User>> GetAllUsersByRestaurantId(int restaurantId)
+        {
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.RestaurantId == restaurantId));
+        }
+
         [CacheAspect]
         public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
@@ -39,5 +54,14 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
+        [SecuredOperation("admin", Priority = 1)]
+        [ValidationAspect(typeof(UserValidator),Priority =2)]
+        [CacheRemoveAspect("IUserService.Get")]
+        public IResult UpdateUserStatus(User user)
+        {
+            _userDal.UpdateUserStatus(user);
+            return new SuccessResult(Messages.UserStatusUpdated);
+        }
+
     }
 }

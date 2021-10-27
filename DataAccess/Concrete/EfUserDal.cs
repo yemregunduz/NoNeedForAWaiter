@@ -26,5 +26,16 @@ namespace DataAccess.Concrete
                 return result.ToList();
             }
         }
+
+        public void UpdateUserStatus(User user)
+        {
+            using (var context = new NoNeedForAWaiterContext())
+            {
+                context.Attach(user);
+                var status = context.Entry(user).Property(u => u.Status);
+                status.IsModified = true;
+                context.SaveChanges();
+            }
+        }
     }
 }

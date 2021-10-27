@@ -10,6 +10,9 @@ namespace Business.Abstract
     {
         IDataResult<List<OperationClaim>> GetClaims(User user);
         IResult Add(User user);
+        IResult Delete(User user);
+        IResult UpdateUserStatus(User user);
         IDataResult<User> GetUserByMail(string email);
+        IDataResult<List<User>> GetAllUsersByRestaurantId(int restaurantId);
     }
 }

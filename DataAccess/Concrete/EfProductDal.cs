@@ -20,6 +20,7 @@ namespace DataAccess.Concrete
                              join c in context.CATEGORIES
                              on p.CategoryId equals c.Id
                              select new ProductDetailDto
+                             
                              {
                                  Id = p.Id,
                                  CategoryId = c.Id,

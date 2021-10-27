@@ -71,5 +71,8 @@ namespace Business.Constants
         public static string EmailIsNotValid = "Lütfen geçerli bir email adresi giriniz.";
         public static string PasswordIsRequired = "Şifre alanı boş bırakılamaz.";
         public static string PasswordIsNotValid = "Şifreniz en az bir büyük harf,bir sayı,bir özel karakterden oluşmalı ve en az 8 karakter olmalıdır.";
+        public static string UserStatusIsInactive = "Kullanıcının durumu pasif.";
+        public static string UserStatusUpdated = "Kullanıcı durumu güncellendi.";
+        public static string UserDeleted = "Kullanıcı silindi.";
     }
 }

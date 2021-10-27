@@ -42,6 +42,10 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<User>(Messages.PasswordError);
             }
+            if (userToCheck.Data.Status==false)
+            {
+                return new ErrorDataResult<User>(Messages.UserStatusIsInactive);
+            }
             return new SuccessDataResult<User>(userToCheck.Data, Messages.SuccessfulLogin);
         }
         [ValidationAspect(typeof(UserForRegisterDtoValidator), Priority = 1)]

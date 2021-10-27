@@ -9,5 +9,6 @@ namespace DataAccess.Abstract
     public interface IUserDal:IEntityRepository<User>
     {
         List<OperationClaim> GetAllClaims(User user);
+        void UpdateUserStatus(User user);
     }
 }
