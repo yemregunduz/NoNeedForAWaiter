@@ -34,10 +34,15 @@ namespace DataAccess.Concrete
             using (var context = new NoNeedForAWaiterContext())
             {
                 var result = from u in context.USERS
+                             join ui in context.USERIMAGES
+                             on u.Id equals ui.UserId into gj1
+                             from ui in gj1.DefaultIfEmpty()
                              join r in context.RESTAURANTS
                              on u.RestaurantId equals r.Id
                              join t in context.TITLES
                              on u.TitleId equals t.Id
+                             
+                             
                              select new UserDetailDto
                              {
                                  Id = u.Id,
@@ -51,7 +56,8 @@ namespace DataAccess.Concrete
                                  Email = u.Email,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
-                                 Status = u.Status
+                                 Status = u.Status,
+                                 UserImagePath = ui.UserImagePath
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
@@ -62,6 +68,9 @@ namespace DataAccess.Concrete
             using (var context = new NoNeedForAWaiterContext())
             {
                 var result = from u in context.USERS
+                             join ui in context.USERIMAGES
+                             on u.Id equals ui.UserId into gj1
+                             from ui in gj1.DefaultIfEmpty()
                              join r in context.RESTAURANTS
                              on u.RestaurantId equals r.Id
                              join t in context.TITLES
