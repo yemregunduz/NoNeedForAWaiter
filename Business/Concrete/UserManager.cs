@@ -5,9 +5,12 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
+
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
+using Entities.Dto;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,9 +20,11 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
+      
         public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
+            
         }
         [SecuredOperation("user.add,admin", Priority = 1)]
         [ValidationAspect(typeof(UserValidator), Priority = 2)]
@@ -39,9 +44,9 @@ namespace Business.Concrete
 
         [SecuredOperation("admin",Priority =1)]
         [CacheAspect]
-        public IDataResult<List<User>> GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status)
+        public IDataResult<List<UserDetailDto>> GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status)
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.RestaurantId == restaurantId && u.Status == status));
+            return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetAllUsersDetailDto(u => u.RestaurantId == restaurantId && u.Status == status));
         }
 
         [CacheAspect]
@@ -54,6 +59,20 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
+        [CacheAspect]
+        public IDataResult<UserDetailDto> GetUserDetailDtoByUserId(int userId)
+        {
+            return new SuccessDataResult<UserDetailDto>(_userDal.GetUserDetailDto(u => u.Id == userId),Messages.UserDetailsListed);
+        }
+        [CacheRemoveAspect("IUserService.Get")]
+        [SecuredOperation("admin",Priority =1)]
+        [ValidationAspect(typeof(UserValidator),Priority =2)]
+        public IResult UpdateUserWithoutPassword(User user)
+        {
+            _userDal.UpdateUserWithoutPassword(user);
+            return new SuccessResult(Messages.UserUpdated);
+        }
+
         [SecuredOperation("admin", Priority = 1)]
         [ValidationAspect(typeof(UserValidator),Priority =2)]
         [CacheRemoveAspect("IUserService.Get")]
@@ -62,6 +81,9 @@ namespace Business.Concrete
             _userDal.UpdateUserStatus(user);
             return new SuccessResult(Messages.UserStatusUpdated);
         }
-
+        public IDataResult<User> GetUserById(int userId)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+        }
     }
 }

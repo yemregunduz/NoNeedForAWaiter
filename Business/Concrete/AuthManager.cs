@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Results.Abstract;
@@ -49,6 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(userToCheck.Data, Messages.SuccessfulLogin);
         }
         [ValidationAspect(typeof(UserForRegisterDtoValidator), Priority = 1)]
+        [CacheRemoveAspect("IUserService.Get")]
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -66,6 +68,8 @@ namespace Business.Concrete
                 RestaurantId= userForRegisterDto.RestaurantId,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
+                Salary = userForRegisterDto.Salary,
+                TitleId = userForRegisterDto.TitleId,
                 Status = true
             };
             _userService.Add(user);

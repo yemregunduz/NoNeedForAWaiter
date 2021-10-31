@@ -44,6 +44,10 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<TitleManager>().As<ITitleService>().SingleInstance();
             builder.RegisterType<EfTitleDal>().As<ITitleDal>().SingleInstance();
 
+            builder.RegisterType<UserImageManager>().As<IUserImageService>().SingleInstance();
+            builder.RegisterType<EfUserImageDal>().As<IUserImageDal>().SingleInstance();
+
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

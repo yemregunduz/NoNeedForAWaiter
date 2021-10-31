@@ -78,5 +78,13 @@ namespace Business.Constants
         public static string TitleDeleted = "Ünvan silindi";
         public static string TitleListed = "Ünvanlar listelendi.";
         public static string TitleUpdated = "Ünvan güncellendi.";
+        public static string UserDetailsListed = "Kullanıcı detayı listelendi.";
+        public static string UserUpdated = "Kullanıcı güncellendi.";
+        public static string UserImagePathUpdated = "Kullanıcının fotoğrafı güncellendi.";
+        public static string UserImageAdded = "Fotoğraf kullanıcıya eklendi.";
+        public static string ImageNotFound = "Fotoğraf bulunamadı.";
+        public static string UserImageDeleted = "Kullanıcın fotoğrafı silindi.";
+        public static string UserImageLimitExceeded = "Bir kullanıcıya ait fotoğraf sayısı 5'i geçemez.";
+        public static string UserImageUpdated = "Kullanıcının fotoğrafı güncellendi.";
     }
 }

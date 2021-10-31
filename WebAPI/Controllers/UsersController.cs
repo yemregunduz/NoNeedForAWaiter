@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
         public IActionResult Add(User user)
         {
             var result = _userService.Add(user);
-            if (result.Success==true)
+            if (result.Success == true)
             {
                 return Ok(result);
             }
@@ -49,14 +49,35 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getallusersbyrestaurantidandstatus")]
-        public IActionResult GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status)
+        public IActionResult GetAllUsersByRestaurantIdAndStatus(int restaurantId, bool status)
         {
-            var result = _userService.GetAllUsersByRestaurantIdAndStatus(restaurantId,status);
+            var result = _userService.GetAllUsersByRestaurantIdAndStatus(restaurantId, status);
             if (result.Success == true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+        [HttpGet("getuserdetaildtobyuserid")]
+        public IActionResult GetUserDetailDtoByUserId(int userId)
+        {
+            var result = _userService.GetUserDetailDtoByUserId(userId);
+            if (result.Success == true)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("updateuserwithoutpassword")]
+        public IActionResult UpdateUserWithoutPassword(User user)
+        {
+            var result = _userService.UpdateUserWithoutPassword(user);
+            if (result.Success == true)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }
