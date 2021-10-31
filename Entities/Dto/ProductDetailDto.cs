@@ -14,7 +14,7 @@ namespace Entities.Dto
         public string ProductName { get; set; }
         public int Stock { get; set; }
         public decimal UnitPrice { get; set; }
-        public string ProductImagePath { get; set; }
         public string ProductDescription { get; set; }
+        public string ProductImagePath { get; set; }
     }
 }

@@ -25,5 +25,6 @@ namespace DataAccess.Concrete
         public DbSet<UserOperationClaim> USEROPERATIONCLAIMS { get; set; }
         public DbSet<Title> TITLES { get; set; }
         public DbSet<UserImage> USERIMAGES { get; set; }
+        public DbSet<ProductImage> PRODUCTIMAGES { get; set; }
     }
 }

@@ -17,6 +17,9 @@ namespace DataAccess.Concrete
             using (var context = new NoNeedForAWaiterContext())
             {
                 var result = from p in context.PRODUCTS
+                             join pi in context.PRODUCTIMAGES
+                             on p.Id equals pi.ProductId into gj1
+                             from pi in gj1.DefaultIfEmpty()
                              join c in context.CATEGORIES
                              on p.CategoryId equals c.Id
                              select new ProductDetailDto
@@ -25,7 +28,7 @@ namespace DataAccess.Concrete
                                  Id = p.Id,
                                  CategoryId = c.Id,
                                  ProductDescription = p.ProductDescription,
-                                 ProductImagePath = p.ProductImagePath,
+                                 ProductImagePath = pi.ProductImagePath,
                                  ProductName = p.ProductName,
                                  Stock = p.Stock,
                                  CategoryName = c.CategoryName,

@@ -86,5 +86,7 @@ namespace Business.Constants
         public static string UserImageDeleted = "Kullanıcın fotoğrafı silindi.";
         public static string UserImageLimitExceeded = "Bir kullanıcıya ait fotoğraf sayısı 5'i geçemez.";
         public static string UserImageUpdated = "Kullanıcının fotoğrafı güncellendi.";
+        internal static string ProductImageAdded;
+        internal static string ProductImageDeleted;
     }
 }
