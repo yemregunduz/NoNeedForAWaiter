@@ -91,5 +91,15 @@ namespace Business.Constants
         public static string ProductImagePathIsRequired = "Resim linki alınamadı.";
         public static string UserImagePathIsRequired = "Resim linki alınamadı.";
         public static string UserIdIsRequired = "Kullanıcı bilgisi alınamadı.";
+        public static string OperationClaimAlreadyExist = "Bu yetki zaten mevcut.";
+        public static string OperationClaimAdded = "Yetki eklendi.";
+        public static string OperationClaimDeleted = "Yetki silindi.";
+        public static string OperationClaimsListed = "Yetkiler listelendi.";
+        public static string OperationClaimUpdated = "Yetki güncellendi.";
+        public static string OperationClaimNameCannotContainUpperCase = "Yetki büyük harf içeremez";
+        public static string UserAlreadyHasThisOperationClaim = "Kullanıcı zaten bu yetkiye sahip.";
+        public static string UserOperationClaimAdded = "Yetki kullanıcıya eklendi";
+        public static string UserOperationClaimDeleted = "Yetki kullanıcıdan silindi";
+        public static string UserOperationClaimUpdated = "Kullanıcının yetkisi güncellendi";
     }
 }
