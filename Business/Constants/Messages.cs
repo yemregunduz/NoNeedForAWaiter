@@ -47,7 +47,7 @@ namespace Business.Constants
         public static string TableIdIsRequired = "Masa numarası girilmelidir.";
         public static string OrderDateIsNotValid = "Geçmişe dönük sipariş verilemez.";
         public static string OrderDateIsRequired = "Sipariş tarihi girilmelidir.";
-        public static string ProductIsRequired = "Sipariş detayında ürün olmalıdır.";
+        public static string ProductIsRequired = "Ürün girmek zorunludur.";
         public static string QuantityIsRequired = "Sipariş detayında miktar girmek zorunludur.";
         public static string OrderIdIsRequired = "Sipariş detayı bir siparişe ait olmalıdır.";
         public static string CategoryIdIsRequired = "Ürünün kategorisini girmek zorunludur.";
@@ -86,7 +86,10 @@ namespace Business.Constants
         public static string UserImageDeleted = "Kullanıcın fotoğrafı silindi.";
         public static string UserImageLimitExceeded = "Bir kullanıcıya ait fotoğraf sayısı 5'i geçemez.";
         public static string UserImageUpdated = "Kullanıcının fotoğrafı güncellendi.";
-        internal static string ProductImageAdded;
-        internal static string ProductImageDeleted;
+        public static string ProductImageDeleted = "Ürün fotoğrafı silindi.";
+        public static string ProductImageAdded = "Ürün fotoğrafı eklendi.";
+        public static string ProductImagePathIsRequired = "Resim linki alınamadı.";
+        public static string UserImagePathIsRequired = "Resim linki alınamadı.";
+        public static string UserIdIsRequired = "Kullanıcı bilgisi alınamadı.";
     }
 }

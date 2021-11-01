@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results.Abstract;
@@ -20,6 +24,9 @@ namespace Business.Concrete
         {
             _productImageDal = productImageDal;
         }
+        [SecuredOperation("productimage.add,admin",Priority =1)]
+        [ValidationAspect(typeof(ProductImageValidator),Priority =2)]
+        [CacheRemoveAspect("IProductImageService.Get")]
         public IResult Add(IFormFile file, ProductImage productImage)
         {
             var imageResult = FileHelper.Upload(file);
@@ -31,7 +38,8 @@ namespace Business.Concrete
             _productImageDal.Add(productImage);
             return new SuccessResult(Messages.ProductImageAdded);
         }
-
+        [SecuredOperation("productimage.add,admin",Priority =1)]
+        [CacheRemoveAspect("IProductImageService.Get")]
         public IResult Delete(ProductImage productImage)
         {
             IResult result = BusinessRules.Run(CheckIfImageIsNull(productImage));
@@ -43,17 +51,21 @@ namespace Business.Concrete
             _productImageDal.Delete(productImage);
             return new SuccessResult(Messages.ProductImageDeleted);
         }
-
+        [SecuredOperation("admin", Priority = 1)]
+        [CacheAspect]
         public IDataResult<List<ProductImage>> GetAllProductImagesByProductId(int productId)
         {
             return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(p => p.ProductId == productId));
         }
-
+        [SecuredOperation("admin", Priority = 1)]
+        [CacheAspect]
         public IDataResult<ProductImage> GetProductImageByImageId(int id)
         {
             return new SuccessDataResult<ProductImage>(_productImageDal.Get(p => p.Id == id)); ;
         }
-
+        [SecuredOperation("productimage.add,admin", Priority = 1)]
+        [ValidationAspect(typeof(ProductImageValidator), Priority = 2)]
+        [CacheRemoveAspect("IProductImageService.Get")]
         public IResult Update(IFormFile file, ProductImage productImage)
         {
             IResult result = BusinessRules.Run(CheckIfImageIsNull(productImage));

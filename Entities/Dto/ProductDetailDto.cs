@@ -15,6 +15,7 @@ namespace Entities.Dto
         public int Stock { get; set; }
         public decimal UnitPrice { get; set; }
         public string ProductDescription { get; set; }
+        public int ProductImageId { get; set; }
         public string ProductImagePath { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Entities.Dto
         public int RestaurantId { get; set; }
         public string RestaurantName { get; set; }
         public string Title { get; set; }
+        public int UserImageId { get; set; }
         public string UserImagePath { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

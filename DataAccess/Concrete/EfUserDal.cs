@@ -57,7 +57,8 @@ namespace DataAccess.Concrete
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
                                  Status = u.Status,
-                                 UserImagePath = ui.UserImagePath
+                                 UserImagePath = ui.UserImagePath,
+                                 UserImageId = ui.Id
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
@@ -80,6 +81,8 @@ namespace DataAccess.Concrete
                                  Id = u.Id,
                                  RestaurantId = r.Id,
                                  RestaurantName = r.RestaurantName,
+                                 UserImageId = ui.Id,
+                                 UserImagePath = ui.UserImagePath,
                                  TitleId = t.Id,
                                  Title = t.Title_,
                                  Salary = u.Salary,

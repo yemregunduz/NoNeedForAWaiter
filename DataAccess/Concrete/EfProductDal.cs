@@ -22,12 +22,14 @@ namespace DataAccess.Concrete
                              from pi in gj1.DefaultIfEmpty()
                              join c in context.CATEGORIES
                              on p.CategoryId equals c.Id
+                             orderby p.CategoryId ascending
                              select new ProductDetailDto
                              
                              {
                                  Id = p.Id,
                                  CategoryId = c.Id,
                                  ProductDescription = p.ProductDescription,
+                                 ProductImageId = pi.Id,
                                  ProductImagePath = pi.ProductImagePath,
                                  ProductName = p.ProductName,
                                  Stock = p.Stock,

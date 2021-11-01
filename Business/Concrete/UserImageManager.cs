@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results.Abstract;
@@ -20,6 +24,9 @@ namespace Business.Concrete
         {
             _userImageDal = userImageDal;
         }
+        [SecuredOperation("userimage.add,admin", Priority = 1)]
+        [ValidationAspect(typeof(UserImageValidator), Priority = 2)]
+        [CacheRemoveAspect("IUserImageService.Get")]
         public IResult Add(IFormFile file, UserImage userImage)
         {
             var imageResult = FileHelper.Upload(file);
@@ -31,7 +38,8 @@ namespace Business.Concrete
             _userImageDal.Add(userImage);
             return new SuccessResult(Messages.UserImageAdded);
         }
-
+        [SecuredOperation("userimage.delete,admin", Priority = 1)]
+        [CacheRemoveAspect("IUserImageService.Get")]
         public IResult Delete(UserImage userImage)
         {
             IResult result = BusinessRules.Run(CheckIfImageIsNull(userImage));
@@ -43,17 +51,21 @@ namespace Business.Concrete
             _userImageDal.Delete(userImage);
             return new SuccessResult(Messages.UserImageDeleted);
         }
-
+        [SecuredOperation("admin", Priority = 1)]
+        [CacheAspect]
         public IDataResult<UserImage> Get(int id)
         {
             return new SuccessDataResult<UserImage>(_userImageDal.Get(u => u.Id == id));
         }
-
+        [SecuredOperation("admin", Priority = 1)]
+        [CacheAspect]
         public IDataResult<List<UserImage>> GetAllUserImagesByUserId(int userId)
         {
             return new SuccessDataResult<List<UserImage>>(_userImageDal.GetAll(u => u.UserId == userId));
         }
-
+        [SecuredOperation("userimage.update,admin", Priority = 1)]
+        [ValidationAspect(typeof(UserImageValidator), Priority = 2)]
+        [CacheRemoveAspect("IUserImageService.Get")]
         public IResult Update(IFormFile file, UserImage userImage)
         {
             IResult result = BusinessRules.Run(CheckIfImageIsNull(userImage));

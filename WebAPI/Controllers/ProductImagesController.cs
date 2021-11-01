@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete([FromForm(Name = ("id"))] int imageId)
+        public IActionResult Delete([FromForm(Name =("imageId"))] int imageId)
         {
             var userImage = _productImageService.GetProductImageByImageId(imageId).Data;
             var result = _productImageService.Delete(userImage);
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update([FromForm(Name = ("userImage"))] IFormFile file, [FromForm(Name = ("imageId"))] int imageId)
+        public IActionResult Update([FromForm(Name = ("productImage"))] IFormFile file, [FromForm(Name = ("imageId"))] int imageId)
         {
             var userImage = _productImageService.GetProductImageByImageId(imageId).Data;
             var result = _productImageService.Update(file, userImage);
@@ -50,8 +50,8 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getalluserimagesbyuserid")]
-        public IActionResult GetAllUserImagesByUserId(int productId)
+        [HttpGet("getallproductimagesbyproductid")]
+        public IActionResult GetAllProductImagesByProductId(int productId)
         {
             var result = _productImageService.GetAllProductImagesByProductId(productId);
             if (result.Success == true)

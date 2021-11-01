@@ -25,10 +25,10 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator), Priority = 2)]
         [CacheRemoveAspect("IProductService.Get")]
         [SecuredOperation("product.add,admin",Priority =1)]
-        public IResult Add(Product product)
+        public IDataResult<Product> Add(Product product)
         {
             _productDal.Add(product);
-            return new SuccessResult(Messages.ProductAdded);
+            return new SuccessDataResult<Product>(product,Messages.ProductAdded);
         }
         [CacheRemoveAspect("IProductService.Get")]
         [SecuredOperation("product.delete,admin", Priority = 1)]
