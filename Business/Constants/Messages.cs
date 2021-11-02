@@ -101,5 +101,7 @@ namespace Business.Constants
         public static string UserOperationClaimAdded = "Yetki kullanıcıya eklendi";
         public static string UserOperationClaimDeleted = "Yetki kullanıcıdan silindi";
         public static string UserOperationClaimUpdated = "Kullanıcının yetkisi güncellendi";
+        public static string UserOperationClaimsListed = "Kullanıcıya ait yetkiler listelendi";
+        public static string OperationClaimIdIsRequired = "Kullanıcıya eklemek istediğiniz yetkiyi seçiniz.";
     }
 }
