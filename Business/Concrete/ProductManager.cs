@@ -4,6 +4,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -18,9 +19,11 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
-        public ProductManager(IProductDal productDal)
+        IProductImageService _productImageService;
+        public ProductManager(IProductDal productDal,IProductImageService productImageService)
         {
             _productDal = productDal;
+            _productImageService = productImageService;
         }
         [ValidationAspect(typeof(ProductValidator), Priority = 2)]
         [CacheRemoveAspect("IProductService.Get")]
@@ -34,6 +37,11 @@ namespace Business.Concrete
         [SecuredOperation("product.delete,admin", Priority = 1)]
         public IResult Delete(Product product)
         {
+            IResult result = BusinessRules.Run(CheckIfProductImagesAreDeleted(product));
+            if (result!=null)
+            {
+                return result;
+            }
             _productDal.Delete(product);
             return new SuccessResult(Messages.ProductDeleted);
         }
@@ -65,6 +73,24 @@ namespace Business.Concrete
         {
             _productDal.Update(product);
             return new SuccessResult(Messages.ProductUpdated);
+        }
+
+        //businessRules 
+        private IResult CheckIfProductImagesAreDeleted(Product product)
+        {
+            var productImages = _productImageService.GetAllProductImagesByProductId(product.Id).Data;
+            if (productImages.Count>0)
+            {
+                foreach (var productImage in productImages)
+                {
+                    var result = _productImageService.Delete(productImage);
+                    if (result.Success==false)
+                    {
+                        return new ErrorResult();
+                    }
+                }
+            }
+            return new SuccessResult();
         }
     }
 }

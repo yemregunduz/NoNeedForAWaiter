@@ -5,7 +5,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
-
+using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -20,11 +20,14 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
+        IUserImageService _userImageService;
+        IUserOperationClaimService _userOperationClaimService;
       
-        public UserManager(IUserDal userDal)
+        public UserManager(IUserDal userDal, IUserImageService userImageService, IUserOperationClaimService userOperationClaimService)
         {
             _userDal = userDal;
-            
+            _userImageService = userImageService;
+            _userOperationClaimService = userOperationClaimService;
         }
         [SecuredOperation("user.add,admin", Priority = 1)]
         [ValidationAspect(typeof(UserValidator), Priority = 2)]
@@ -38,6 +41,11 @@ namespace Business.Concrete
         [CacheRemoveAspect("IUserService.Get")]
         public IResult Delete(User user)
         {
+            IResult result = BusinessRules.Run(CheckIfUserImagesAreDeleted(user), CheckIfUserOperationClaimsAreDeleted(user));
+            if (result!=null)
+            {
+                return result;
+            }
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
         }
@@ -81,9 +89,47 @@ namespace Business.Concrete
             _userDal.UpdateUserStatus(user);
             return new SuccessResult(Messages.UserStatusUpdated);
         }
+        [CacheAspect]
         public IDataResult<User> GetUserById(int userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
+
+        //businessRules
+        private IResult CheckIfUserImagesAreDeleted(User user)
+        {
+            var userImages = _userImageService.GetAllUserImagesByUserId(user.Id).Data;
+            if (userImages.Count>0)
+            {
+                foreach (var userImage in userImages)
+                {
+                    var result = _userImageService.Delete(userImage);
+                    if(result.Success == false)
+                    {
+                        return new ErrorResult();
+                    }
+                }
+                
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfUserOperationClaimsAreDeleted(User user)
+        {
+            var userOperationClaims = _userOperationClaimService.GetAllOperationClaimsByUserId(user.Id).Data;
+            if (userOperationClaims.Count>0)
+            {
+                foreach (var userOperationClaim in userOperationClaims)
+                {
+                    var result = _userOperationClaimService.Delete(userOperationClaim);
+                    if (result.Success==false)
+                    {
+                        return new ErrorResult();
+                    }
+                }
+            }
+            return new SuccessResult();
+        }
+
+
     }
 }

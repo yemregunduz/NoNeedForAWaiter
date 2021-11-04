@@ -17,6 +17,7 @@ namespace WebAPI.Controllers
         public UsersController(IUserService userService)
         {
             _userService = userService;
+            
         }
         [HttpPost("add")]
         public IActionResult Add(User user)

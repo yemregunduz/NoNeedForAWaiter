@@ -14,8 +14,6 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.ProductId)
                 .NotNull().WithMessage(Messages.ProductIsRequired)
                 .GreaterThan(0).WithMessage(Messages.ProductIsRequired);
-            RuleFor(p => p.ProductImagePath)
-                .NotEmpty().WithMessage(Messages.ProductImagePathIsRequired);
         }
     }
 }
