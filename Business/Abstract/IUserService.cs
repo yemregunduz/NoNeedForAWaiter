@@ -19,6 +19,6 @@ namespace Business.Abstract
         IDataResult<User> GetUserById(int userId);
         IDataResult<List<UserDetailDto>> GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status);
         IDataResult<UserDetailDto> GetUserDetailDtoByUserId(int userId);
-
+        IDataResult<List<UserDetailDto>> GetAllUsersByFilterText(string filterText);
     }
 }

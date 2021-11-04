@@ -94,6 +94,11 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
+        public IDataResult<List<UserDetailDto>> GetAllUsersByFilterText(string filterText)
+        {
+            return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetAllUsersDetailDto(u => u.FirstName.Contains(filterText) ||
+            u.LastName.Contains(filterText) || u.Title == filterText || u.Email.Contains(filterText)), Messages.UserDetailsListed);
+        }
 
         //businessRules
         private IResult CheckIfUserImagesAreDeleted(User user)
@@ -130,6 +135,6 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-
+        
     }
 }
