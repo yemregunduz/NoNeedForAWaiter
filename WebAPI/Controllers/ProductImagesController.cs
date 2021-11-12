@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Extensions;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +15,16 @@ namespace WebAPI.Controllers
     public class ProductImagesController : ControllerBase
     {
         IProductImageService _productImageService;
-        public ProductImagesController(IProductImageService productImageService)
+        IHttpContextAccessor _httpContextAccessor;
+        public ProductImagesController(IProductImageService productImageService, IHttpContextAccessor httpContextAccessor)
         {
             _productImageService = productImageService;
+            _httpContextAccessor = httpContextAccessor;
         }
         [HttpPost("add")]
         public IActionResult Add([FromForm(Name = ("productImage"))] IFormFile file, [FromForm] ProductImage productImage)
         {
+            var userClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
             var result = _productImageService.Add(file, productImage);
             if (result.Success == true)
             {

@@ -103,5 +103,11 @@ namespace Business.Constants
         public static string UserOperationClaimUpdated = "Kullanıcının yetkisi güncellendi";
         public static string UserOperationClaimsListed = "Kullanıcıya ait yetkiler listelendi";
         public static string OperationClaimIdIsRequired = "Kullanıcıya eklemek istediğiniz yetkiyi seçiniz.";
+        public static string BirthOfDateIsRequired = "Doğum tarihi girmek zorunludur.";
+        public static string TcNoIsRequired = "T.C kimlik numarası girmek zorunludur.";
+        public static string TcNoIsNotValid = "Geçersiz T.C kimlik numarası!";
+        public static string DateOfRecruitmentIsRequired = "İşe giriş tarihi belirtilmelidir.";
+        public static string PasswordChanged = "Şifre değiştirildi.";
+        public static string SecurityCodeError = "Tek kullanımlık şifre hatalı!";
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
+using Core.Utilities.Helpers.MailHelper;
 using Core.Utilities.IoC;
+using Core.Utilities.Mail;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +20,8 @@ namespace Core.DependencyResolvers
             serviceColletion.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             serviceColletion.AddSingleton<ICacheManager, MemoryCacheManager>();
             serviceColletion.AddSingleton<Stopwatch>();
+            serviceColletion.AddSingleton<IMailSendHelper, MailSendHelper>();
+            serviceColletion.AddSingleton<ISmtpClient, SmtpClient>();
         }
     }
 }

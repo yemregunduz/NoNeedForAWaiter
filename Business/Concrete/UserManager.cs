@@ -49,6 +49,11 @@ namespace Business.Concrete
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
         }
+        public IResult Update(User user)
+        {
+            _userDal.Update(user);
+            return new SuccessResult(Messages.UserUpdated);
+        }
 
         [SecuredOperation("admin",Priority =1)]
         [CacheAspect]

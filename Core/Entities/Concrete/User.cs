@@ -11,6 +11,12 @@ namespace Core.Entities.Concrete
         public int RestaurantId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string TcNo { get; set; }
+        public string MobilePhoneNumber { get; set; }
+        public string FixedPhoneNumber { get; set; }
+        public DateTime? BirthOfDate { get; set; }
+        public DateTime? DateOfRecruitment { get; set; }
+        public DateTime? DateOfDismissal { get; set; }
         public string Email { get; set; }
         public int TitleId { get; set; }
         public decimal Salary { get; set; }
