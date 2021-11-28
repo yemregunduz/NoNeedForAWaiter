@@ -54,7 +54,13 @@ namespace Core.DataAccess.Concrete
             using (TContext context = new TContext())
             {
                 var entityToUpdate = context.Entry(entity);
-                entityToUpdate.State = EntityState.Modified;
+                foreach (var property in entityToUpdate.Properties)
+                {
+                    if (!property.Metadata.Name.Equals("Id")&&property.CurrentValue!=null)
+                    {
+                        property.IsModified = true;
+                    }
+                }
                 context.SaveChanges();
             }
         }

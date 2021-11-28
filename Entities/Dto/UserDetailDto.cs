@@ -14,6 +14,12 @@ namespace Entities.Dto
         public string Title { get; set; }
         public int UserImageId { get; set; }
         public string UserImagePath { get; set; }
+        public string TcNo { get; set; }
+        public string MobilePhoneNumber { get; set; }
+        public string FixedPhoneNumber { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public DateTime? DateOfRecruitment { get; set; }
+        public DateTime? DateOfDismissal { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

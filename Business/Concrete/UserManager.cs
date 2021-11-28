@@ -49,6 +49,7 @@ namespace Business.Concrete
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
         }
+        [CacheRemoveAspect("IUserService.Get")]
         public IResult Update(User user)
         {
             _userDal.Update(user);
@@ -76,23 +77,6 @@ namespace Business.Concrete
         public IDataResult<UserDetailDto> GetUserDetailDtoByUserId(int userId)
         {
             return new SuccessDataResult<UserDetailDto>(_userDal.GetUserDetailDto(u => u.Id == userId),Messages.UserDetailsListed);
-        }
-        [CacheRemoveAspect("IUserService.Get")]
-        [SecuredOperation("admin",Priority =1)]
-        [ValidationAspect(typeof(UserValidator),Priority =2)]
-        public IResult UpdateUserWithoutPassword(User user)
-        {
-            _userDal.UpdateUserWithoutPassword(user);
-            return new SuccessResult(Messages.UserUpdated);
-        }
-
-        [SecuredOperation("admin", Priority = 1)]
-        [ValidationAspect(typeof(UserValidator),Priority =2)]
-        [CacheRemoveAspect("IUserService.Get")]
-        public IResult UpdateUserStatus(User user)
-        {
-            _userDal.UpdateUserStatus(user);
-            return new SuccessResult(Messages.UserStatusUpdated);
         }
         [CacheAspect]
         public IDataResult<User> GetUserById(int userId)

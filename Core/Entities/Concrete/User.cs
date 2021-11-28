@@ -14,7 +14,7 @@ namespace Core.Entities.Concrete
         public string TcNo { get; set; }
         public string MobilePhoneNumber { get; set; }
         public string FixedPhoneNumber { get; set; }
-        public DateTime? BirthOfDate { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public DateTime? DateOfRecruitment { get; set; }
         public DateTime? DateOfDismissal { get; set; }
         public string Email { get; set; }

@@ -29,20 +29,20 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("delete")]
-        public IActionResult Delete(User user)
+        [HttpPost("update")]
+        public IActionResult Update(User user)
         {
-            var result = _userService.Delete(user);
+            var result = _userService.Update(user);
             if (result.Success == true)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpPost("updateuserstatus")]
-        public IActionResult UpdateUserStatus(User user)
+        [HttpPost("delete")]
+        public IActionResult Delete(User user)
         {
-            var result = _userService.UpdateUserStatus(user);
+            var result = _userService.Delete(user);
             if (result.Success == true)
             {
                 return Ok(result);
@@ -63,16 +63,6 @@ namespace WebAPI.Controllers
         public IActionResult GetUserDetailDtoByUserId(int userId)
         {
             var result = _userService.GetUserDetailDtoByUserId(userId);
-            if (result.Success == true)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpPost("updateuserwithoutpassword")]
-        public IActionResult UpdateUserWithoutPassword(User user)
-        {
-            var result = _userService.UpdateUserWithoutPassword(user);
             if (result.Success == true)
             {
                 return Ok(result);

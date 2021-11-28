@@ -40,7 +40,7 @@ namespace Core.Utilities.Mail
             _firstRandomLetter = random.Next(65, 91);
             _secondRandomLetter = random.Next(65, 91);
 
-            string securityCode = _firstRandomNumber.ToString() + _secondRandomNumber.ToString() + _firstRandomLetter.ToString() + _thirdRandomNumber.ToString() + _secondRandomLetter.ToString();
+            string securityCode = _firstRandomNumber.ToString() + _secondRandomNumber.ToString() + Convert.ToChar( _firstRandomLetter) + _thirdRandomNumber.ToString() + Convert.ToChar( _secondRandomLetter);
             return securityCode;
         }
     }

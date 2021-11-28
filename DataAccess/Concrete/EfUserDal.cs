@@ -58,7 +58,13 @@ namespace DataAccess.Concrete
                                  LastName = u.LastName,
                                  Status = u.Status,
                                  UserImagePath = ui.UserImagePath,
-                                 UserImageId = ui.Id
+                                 UserImageId = ui.Id,
+                                 DateOfBirth = u.DateOfBirth,
+                                 DateOfDismissal = u.DateOfDismissal,
+                                 DateOfRecruitment = u.DateOfRecruitment,
+                                 FixedPhoneNumber = u.FixedPhoneNumber,
+                                 MobilePhoneNumber = u.MobilePhoneNumber,
+                                 TcNo = u.TcNo
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
@@ -91,36 +97,17 @@ namespace DataAccess.Concrete
                                  Email = u.Email,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
-                                 Status = u.Status
+                                 Status = u.Status,
+                                 DateOfBirth = u.DateOfBirth,
+                                 DateOfDismissal = u.DateOfDismissal,
+                                 DateOfRecruitment = u.DateOfRecruitment,
+                                 FixedPhoneNumber = u.FixedPhoneNumber,
+                                 MobilePhoneNumber = u.MobilePhoneNumber,
+                                 TcNo = u.TcNo
                              };
                 return result.SingleOrDefault(filter);
             }
         }
 
-        public void UpdateUserStatus(User user)
-        {
-            using (var context = new NoNeedForAWaiterContext())
-            {
-                context.Attach(user);
-                var status = context.Entry(user).Property(u => u.Status);
-                status.IsModified = true;
-                context.SaveChanges();
-            }
-        }
-
-        public void UpdateUserWithoutPassword(User user)
-        {
-            using (var context = new NoNeedForAWaiterContext())
-            {
-                context.Attach(user);
-                context.Entry(user).Property(u => u.FirstName).IsModified = true;
-                context.Entry(user).Property(u => u.LastName).IsModified = true;
-                context.Entry(user).Property(u => u.Email).IsModified = true;
-                context.Entry(user).Property(u => u.RestaurantId).IsModified = true;
-                context.Entry(user).Property(u => u.Salary).IsModified = true;
-                context.Entry(user).Property(u => u.Status).IsModified = true;
-                context.SaveChanges();
-            }
-        }
     }
 }

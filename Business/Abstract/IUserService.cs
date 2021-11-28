@@ -14,8 +14,6 @@ namespace Business.Abstract
         IResult Add(User user);
         IResult Delete(User user);
         IResult Update(User user);
-        IResult UpdateUserWithoutPassword(User user);
-        IResult UpdateUserStatus(User user);
         IDataResult<User> GetUserByMail(string email);
         IDataResult<User> GetUserById(int userId);
         IDataResult<List<UserDetailDto>> GetAllUsersByRestaurantIdAndStatus(int restaurantId,bool status);
