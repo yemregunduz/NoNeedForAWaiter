@@ -43,13 +43,11 @@ namespace Business.Concrete
             _userOperationClaimDal.Delete(userOperationClaim);
             return new SuccessResult(Messages.UserOperationClaimDeleted);
         }
-        [SecuredOperation("admin", Priority = 1)]
         [CacheAspect(Priority =2)]
         public IDataResult<List<UserOperationClaimDetailDto>> GetAllOperationClaimDetailsByUserId(int userId)
         {
             return new SuccessDataResult<List<UserOperationClaimDetailDto>>(_userOperationClaimDal.GetAllUserOperationClaimDetails(u => u.UserId == userId), Messages.UserOperationClaimsListed);
         }
-        [SecuredOperation("admin", Priority = 1)]
         [CacheAspect(Priority = 2)]
         public IDataResult<List<UserOperationClaim>> GetAllOperationClaimsByUserId(int userId)
         {

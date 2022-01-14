@@ -44,6 +44,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<OrderTableDto>>(_orderDal.GetAllOrderTablesDto(o => o.TableId == tableId),Messages.OrdersListedByTableId);
         }
+        public IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId,bool orderStatus)
+        {
+            return new SuccessDataResult<List<OrderTableDto>>(_orderDal.GetAllOrderTablesDto(o => o.RestaurantId == restaurantId && o.OrderStatus == orderStatus));
+        }
         [ValidationAspect(typeof(OrderValidator), Priority = 1)]
         [CacheRemoveAspect("IOrderService.Get")]
         public IResult Update(Order order)

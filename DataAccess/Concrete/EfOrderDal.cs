@@ -21,6 +21,7 @@ namespace DataAccess.Concrete
                              on o.TableId equals t.Id
                              join r in context.RESTAURANTS
                              on t.RestaurantId equals r.Id
+                             orderby o.OrderDate descending 
                              select new OrderTableDto
                              {
                                  OrderId = o.Id,

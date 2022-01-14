@@ -68,5 +68,15 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("getallordertablesdtobyrestaurantidandorderstatus")]
+        public IActionResult GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId,bool orderStatus)
+        {
+            var result = _orderService.GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(restaurantId, orderStatus);
+            if (result.Success == true)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }
