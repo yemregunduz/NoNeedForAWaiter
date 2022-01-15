@@ -109,5 +109,6 @@ namespace Business.Constants
         public static string DateOfRecruitmentIsRequired = "İşe giriş tarihi belirtilmelidir.";
         public static string PasswordChanged = "Şifre değiştirildi.";
         public static string SecurityCodeError = "Tek kullanımlık şifre hatalı!";
+        public static string OrderDetailsListed = "Sipariş detayları listelendi.";
     }
 }

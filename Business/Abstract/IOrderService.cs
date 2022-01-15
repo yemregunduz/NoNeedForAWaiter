@@ -12,7 +12,7 @@ namespace Business.Abstract
         IResult Add(Order order);
         IResult Delete(Order order);
         IResult Update(Order order);
-        IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId, bool orderStatus);
+        IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantIdAndOrderStatusAtTheCurrentDay(int restaurantId, int orderStatus);
         IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantId(int restaurantId);
         IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByTableId(int tableId);
     }

@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
         public IActionResult Add(Order order)
         {
             var result = _orderService.Add(order);
-            if (result.Success==true)
+            if (result.Success == true)
             {
                 return Ok(result);
             }
@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
         public IActionResult GetAllOrderTablesDtoByRestaurantId(int restaurantId)
         {
             var result = _orderService.GetAllOrderTablesDtoByRestaurantId(restaurantId);
-            if (result.Success==true)
+            if (result.Success == true)
             {
                 return Ok(result);
             }
@@ -69,9 +69,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getallordertablesdtobyrestaurantidandorderstatus")]
-        public IActionResult GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId,bool orderStatus)
+        public IActionResult GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId, int orderStatus)
         {
-            var result = _orderService.GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(restaurantId, orderStatus);
+            var result = _orderService.GetAllOrderTablesDtoByRestaurantIdAndOrderStatusAtTheCurrentDay(restaurantId, orderStatus);
             if (result.Success == true)
             {
                 return Ok(result);

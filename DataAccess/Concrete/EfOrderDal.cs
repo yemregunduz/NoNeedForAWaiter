@@ -21,10 +21,10 @@ namespace DataAccess.Concrete
                              on o.TableId equals t.Id
                              join r in context.RESTAURANTS
                              on t.RestaurantId equals r.Id
-                             orderby o.OrderDate descending 
+                             
                              select new OrderTableDto
                              {
-                                 OrderId = o.Id,
+                                 Id = o.Id,
                                  TableId = t.Id,
                                  RestaurantId = r.Id,
                                  OrderAmount = o.OrderAmount,
@@ -33,7 +33,7 @@ namespace DataAccess.Concrete
                                  RestaurantName = r.RestaurantName,
                                  TableNo = t.TableNo
                              };
-                return filter == null ? result.ToList() : result.Where(filter).ToList();
+                return filter == null ? result.OrderBy(o=>o.OrderStatus).ThenBy(o=>o.OrderDate).ToList() : result.OrderBy(o => o.OrderStatus).ThenBy(o => o.OrderDate).Where(filter).ToList();
             }
         }
     }

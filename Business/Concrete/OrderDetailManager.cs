@@ -7,6 +7,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,6 +34,12 @@ namespace Business.Concrete
             _orderDetailDal.Delete(orderDetail);
             return new SuccessResult(Messages.OrderDetailDeleted);
         }
+        [CacheAspect]
+        public IDataResult<List<OrderDetailDto>> GetAllOrderDetailDtosByOrderId(int orderId)
+        {
+            return new SuccessDataResult<List<OrderDetailDto>>(_orderDetailDal.GetAllOrderDetailDto(od => od.OrderId == orderId), Messages.OrderDetailsListed);
+        }
+
         [CacheAspect]
         public IDataResult<List<OrderDetail>> GetAllOrderDetailsByOrderId(int orderId)
         {
