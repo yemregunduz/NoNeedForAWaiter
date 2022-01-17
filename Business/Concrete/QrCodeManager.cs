@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Business;
+using Core.Utilities.Helpers;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -24,12 +26,12 @@ namespace Business.Concrete
         }
         public IResult Add(QrCode qrCode)
         {
-            QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
-            qrCodeEncoder.QRCodeScale = 1;
-            Bitmap qrCodeToCreate = qrCodeEncoder.Encode(qrCode.RouterLink);
-            MemoryStream memoryStream = new MemoryStream();
-            qrCodeToCreate.Save(memoryStream, ImageFormat.Jpeg);
-            qrCode.QrCodeImagePath = memoryStream.ToArray();
+            qrCode = QrCodeHelper.CreateQrCode(qrCode);
+            var result = BusinessRules.Run(CheckIfQrCodeLimitExceeded(qrCode.TableId));
+            if (result!=null)
+            {
+                return result;
+            }
             _qrCodeDal.Add(qrCode);
             return new SuccessResult(Messages.QrCodeCreated);
         }
@@ -54,6 +56,17 @@ namespace Business.Concrete
         {
             _qrCodeDal.Update(qrCode);
             return new SuccessResult(Messages.QrCodeUpdated);
+        }
+        //businesRules
+
+        private IResult CheckIfQrCodeLimitExceeded(int tableId)
+        {
+            var countOfUserImages = GetAllQrCodeTableDtosByTableId(tableId).Data.Count;
+            if (countOfUserImages >= 12)
+            {
+                return new ErrorResult(Messages.QrCodeLimitExceeded);
+            }
+            return new SuccessResult();
         }
     }
 }

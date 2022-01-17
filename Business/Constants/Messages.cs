@@ -115,5 +115,6 @@ namespace Business.Constants
         public static string QrCodeListedByRestaurantId = "Restorana ait tüm qr codelar listelendi.";
         public static string QrCodeListedByTableId = "Masaya ait tüm qr codelar listelendi.";
         public static string QrCodeUpdated = "Qr code güncellendi.";
+        public static string QrCodeLimitExceeded = "Bir masaya en fazla 12 adet qr code ekleyebilirsiniz.";
     }
 }
