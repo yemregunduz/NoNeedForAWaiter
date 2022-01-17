@@ -9,10 +9,10 @@ namespace Business.Abstract
 {
     public interface IOrderService
     {
-        IResult Add(Order order);
+        IDataResult<Order> Add (Order order);
         IResult Delete(Order order);
         IResult Update(Order order);
-        IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantIdAndOrderStatusAtTheCurrentDay(int restaurantId, int orderStatus);
+        IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId, int orderStatus);
         IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantId(int restaurantId);
         IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByTableId(int tableId);
     }

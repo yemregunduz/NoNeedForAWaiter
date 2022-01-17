@@ -23,10 +23,10 @@ namespace Business.Concrete
         }
         [ValidationAspect(typeof(OrderValidator), Priority = 1)]
         [CacheRemoveAspect("IOrderService.Get")]
-        public IResult Add(Order order)
+        public IDataResult<Order> Add(Order order)
         {
             _orderDal.Add(order);
-            return new SuccessResult(Messages.OrderAdded);
+            return new SuccessDataResult<Order>(order,Messages.OrderAdded);
         }
         [CacheRemoveAspect("IOrderService.Get")]
         public IResult Delete(Order order)
@@ -44,10 +44,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<OrderTableDto>>(_orderDal.GetAllOrderTablesDto(o => o.TableId == tableId),Messages.OrdersListedByTableId);
         }
-        [CacheAspect]
-        public IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantIdAndOrderStatusAtTheCurrentDay(int restaurantId,int orderStatus)
+        public IDataResult<List<OrderTableDto>> GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId,int orderStatus)
         {
-            return new SuccessDataResult<List<OrderTableDto>>(_orderDal.GetAllOrderTablesDto(o => o.RestaurantId == restaurantId && o.OrderStatus!=orderStatus  && o.OrderDate.Date==DateTime.Now.Date));
+            return new SuccessDataResult<List<OrderTableDto>>(_orderDal.GetAllOrderTablesDto(o => o.RestaurantId == restaurantId && o.OrderStatus!=orderStatus));
         }
         [ValidationAspect(typeof(OrderValidator), Priority = 1)]
         [CacheRemoveAspect("IOrderService.Get")]

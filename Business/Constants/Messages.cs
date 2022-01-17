@@ -110,5 +110,10 @@ namespace Business.Constants
         public static string PasswordChanged = "Şifre değiştirildi.";
         public static string SecurityCodeError = "Tek kullanımlık şifre hatalı!";
         public static string OrderDetailsListed = "Sipariş detayları listelendi.";
+        public static string QrCodeCreated = "Qr code oluşturuldu.";
+        public static string QrCodeDeleted = "Qr code silindi.";
+        public static string QrCodeListedByRestaurantId = "Restorana ait tüm qr codelar listelendi.";
+        public static string QrCodeListedByTableId = "Masaya ait tüm qr codelar listelendi.";
+        public static string QrCodeUpdated = "Qr code güncellendi.";
     }
 }

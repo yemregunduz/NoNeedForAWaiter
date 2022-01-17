@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
         [HttpGet("getallordertablesdtobyrestaurantidandorderstatus")]
         public IActionResult GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(int restaurantId, int orderStatus)
         {
-            var result = _orderService.GetAllOrderTablesDtoByRestaurantIdAndOrderStatusAtTheCurrentDay(restaurantId, orderStatus);
+            var result = _orderService.GetAllOrderTablesDtoByRestaurantIdAndOrderStatus(restaurantId, orderStatus);
             if (result.Success == true)
             {
                 return Ok(result);

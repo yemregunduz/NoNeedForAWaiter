@@ -56,6 +56,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>().SingleInstance();
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
 
+            builder.RegisterType<QrCodeManager>().As<IQrCodeService>().SingleInstance();
+            builder.RegisterType<EfQrCodeDal>().As<IQrCodeDal>().SingleInstance();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

@@ -26,5 +26,6 @@ namespace DataAccess.Concrete
         public DbSet<Title> TITLES { get; set; }
         public DbSet<UserImage> USERIMAGES { get; set; }
         public DbSet<ProductImage> PRODUCTIMAGES { get; set; }
+        public DbSet<QrCode> QRCODES { get; set; }
     }
 }
