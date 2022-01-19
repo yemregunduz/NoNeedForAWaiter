@@ -10,6 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IQrCodeDal:IEntityRepository<QrCode>
     {
-        List<QrCodeTableDto> GetAllQrCodeTableDtos(Expression<Func<QrCodeTableDto, bool>> filter = null);
+        public List<QrCodeTableDto> GetAllQrCodeTableDtos(Expression<Func<QrCodeTableDto, bool>> filter = null);
     }
 }

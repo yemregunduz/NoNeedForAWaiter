@@ -37,7 +37,7 @@ namespace DataAccess.Concrete
                                  UnitPrice = p.UnitPrice,
                                  RestaurantId=p.RestaurantId
                              };
-                return filter == null ? result.ToList() : result.Where(filter).ToList();
+                return filter == null ? result.OrderBy(c=>c.CategoryId).ThenBy(p=>p.Id).ToList() : result.Where(filter).OrderBy(c => c.CategoryId).ThenBy(p => p.Id).ToList();
             }
         }
     }
