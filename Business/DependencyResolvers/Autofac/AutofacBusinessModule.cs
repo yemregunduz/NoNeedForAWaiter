@@ -59,6 +59,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<QrCodeManager>().As<IQrCodeService>().SingleInstance();
             builder.RegisterType<EfQrCodeDal>().As<IQrCodeDal>().SingleInstance();
 
+            builder.RegisterType<ReportManager>().As<IReportService>().SingleInstance();
+            builder.RegisterType<EfReportDal>().As<IReportDal>().SingleInstance();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
